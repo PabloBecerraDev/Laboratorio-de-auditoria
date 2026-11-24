@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Nomina — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Nomina</h2>
+  <table>
+    <tr><th>Empleado</th><th>Area</th><th>Salario base</th><th>Bonificaciones</th><th>Ingreso</th><th>Cuenta</th></tr>
+    {% for r in registros %}
+    <tr>
+      <td>{{ r.empleado.nombre_completo }}</td>
+      <td>{{ r.empleado.area }}</td>
+      <td>${{ "{:,.0f}".format(r.salario_base) }}</td>
+      <td>${{ "{:,.0f}".format(r.bonificaciones) }}</td>
+      <td>{{ r.fecha_ingreso }}</td>
+      <td>{{ r.cuenta_bancaria }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

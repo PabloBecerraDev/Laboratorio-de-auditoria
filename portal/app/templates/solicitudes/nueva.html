@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Nueva solicitud — Nortia{% endblock %}
+{% block content %}
+<div class="card" style="max-width:480px;">
+  <h2>Nueva solicitud de acceso</h2>
+  <form method="post">
+    <label>Recurso solicitado</label>
+    <input type="text" name="recurso_solicitado" placeholder="Ej: Modulo Finanzas - lectura" required>
+    <label>Justificacion</label>
+    <textarea name="justificacion" rows="4" required></textarea>
+    <button class="btn" type="submit">Enviar</button>
+  </form>
+</div>
+{% endblock %}

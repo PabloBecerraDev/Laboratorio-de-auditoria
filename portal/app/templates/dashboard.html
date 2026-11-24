@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Inicio — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Bienvenido/a, {{ current_user.nombre_completo }}</h2>
+  <p>Area: <span class="badge">{{ current_user.area }}</span> &nbsp; Rol: <span class="badge">{{ current_user.rol }}</span></p>
+  <p>Modulos disponibles para tu rol:</p>
+  <ul>
+    {% for m in modulos %}<li>{{ m }}</li>{% endfor %}
+  </ul>
+</div>
+{% endblock %}

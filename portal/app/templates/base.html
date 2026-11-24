@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Nortia Intranet{% endblock %}</title>
+<style>
+  :root { --nortia-green: #1b5e20; --nortia-dark: #10241a; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f4f6f5; color: #1c1c1c; }
+  header { background: var(--nortia-dark); color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+  header a { color: #fff; text-decoration: none; }
+  header .brand { font-weight: 700; font-size: 1.2rem; }
+  nav a { margin-right: 16px; color: #cfe8d6; font-size: 0.9rem; }
+  main { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+  .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; font-size: 0.92rem; }
+  th { background: #eef5ee; }
+  .btn { display: inline-block; background: var(--nortia-green); color: #fff; padding: 7px 14px; border-radius: 5px; text-decoration: none; border: none; cursor: pointer; font-size: 0.88rem; }
+  .btn.secondary { background: #777; }
+  .btn.danger { background: #b23b3b; }
+  input, select, textarea { width: 100%; padding: 8px; margin: 6px 0 14px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.95rem; }
+  label { font-weight: 600; font-size: 0.88rem; }
+  .flash { padding: 10px 14px; border-radius: 5px; margin-bottom: 14px; font-size: 0.9rem; }
+  .flash.error { background: #fdecea; color: #a12f2f; border: 1px solid #f3b4ae; }
+  .flash.success { background: #e9f7ef; color: #1b5e20; border: 1px solid #a7d7b5; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; background: #e0e0e0; }
+  .warning-banner { background: #b23b3b; color: #fff; text-align: center; padding: 6px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; }
+  footer { text-align: center; color: #888; font-size: 0.78rem; margin: 32px 0; }
+</style>
+</head>
+<body>
+<div class="warning-banner">⚠ ENTORNO DE LABORATORIO DELIBERADAMENTE VULNERABLE — SOLO USO LOCAL (127.0.0.1) Y EDUCATIVO — NO INGRESAR DATOS REALES</div>
+<header>
+  <a href="{{ url_for('dashboard.index') if current_user.is_authenticated else url_for('auth.login') }}" class="brand">Nortia Distribuciones S.A.S. — Intranet</a>
+  {% if current_user.is_authenticated %}
+  <nav>
+    <a href="{{ url_for('dashboard.index') }}">Inicio</a>
+    <a href="{{ url_for('clientes.listar') }}">Clientes</a>
+    <a href="{{ url_for('nomina.listar') }}">Nomina</a>
+    <a href="{{ url_for('finanzas.listar') }}">Finanzas</a>
+    <a href="{{ url_for('admin_usuarios.listar') }}">Usuarios</a>
+    <a href="{{ url_for('solicitudes.listar') }}">Solicitudes</a>
+    <a href="{{ url_for('auth.logout') }}">Salir ({{ current_user.username }})</a>
+  </nav>
+  {% endif %}
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>Laboratorio academico de auditoria ISO 27001 — Anexo 9, Control de Accesos. Datos 100% ficticios.</footer>
+</body>
+</html>

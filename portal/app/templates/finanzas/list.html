@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Finanzas — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Movimientos financieros</h2>
+  <table>
+    <tr><th>Fecha</th><th>Concepto</th><th>Tipo</th><th>Monto</th><th>Registrado por</th></tr>
+    {% for m in movimientos %}
+    <tr>
+      <td>{{ m.fecha }}</td>
+      <td>{{ m.concepto }}</td>
+      <td>{{ m.tipo }}</td>
+      <td>${{ "{:,.0f}".format(m.monto) }}</td>
+      <td>{{ m.registrado_por.nombre_completo if m.registrado_por else "-" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: nortia-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nortia_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-N0rt1a_Db_2024}
+      POSTGRES_DB: ${POSTGRES_DB:-nortia}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nortia_admin} -d ${POSTGRES_DB:-nortia}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - nortia-net
+
+  portal:
+    build: ./portal
+    container_name: nortia-portal
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-nortia_admin}:${POSTGRES_PASSWORD:-N0rt1a_Db_2024}@db:5432/${POSTGRES_DB:-nortia}
+      SECRET_KEY: ${PORTAL_SECRET_KEY:-cambia-esta-clave-en-produccion}
+      FLASK_ENV: production
+    volumes:
+      - ./logs:/app/logs
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - nortia-net
+
+  legacy:
+    build: ./legacy-portal
+    container_name: nortia-legacy-proveedores
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-nortia_admin}:${POSTGRES_PASSWORD:-N0rt1a_Db_2024}@db:5432/${POSTGRES_DB:-nortia}
+    volumes:
+      - ./logs:/app/logs
+    ports:
+      - "127.0.0.1:5001:5001"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - nortia-net
+
+  ssh-lab:
+    build: ./ssh-lab
+    container_name: nortia-ssh-lab
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:2222:22"
+    networks:
+      - nortia-net
+
+  gitea:
+    image: gitea/gitea:1.22
+    container_name: nortia-gitea
+    restart: unless-stopped
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__security__INSTALL_LOCK=true
+      - GITEA__database__DB_TYPE=sqlite3
+      - GITEA__server__ROOT_URL=http://127.0.0.1:3000/
+      - GITEA__server__HTTP_PORT=3000
+      - GITEA__service__DISABLE_REGISTRATION=true
+    volumes:
+      - gitea_data:/data
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:2223:22"
+    networks:
+      - nortia-net
+
+  gitea-init:
+    build: ./gitea-init
+    container_name: nortia-gitea-init
+    environment:
+      - GITEA_CONTAINER=nortia-gitea
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portal:/src/portal-nortia:ro
+    depends_on:
+      - gitea
+    networks:
+      - nortia-net
+    restart: "no"
+
+networks:
+  nortia-net:
+    driver: bridge
+
+volumes:
+  db_data:
+  gitea_data:

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ cliente.nombre_empresa }} — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>{{ cliente.nombre_empresa }}</h2>
+  <p><strong>NIT:</strong> {{ cliente.nit }}</p>
+  <p><strong>Contacto:</strong> {{ cliente.contacto_nombre }} — {{ cliente.contacto_telefono }} — {{ cliente.contacto_email }}</p>
+  <p><strong>Cupo de credito:</strong> ${{ "{:,.0f}".format(cliente.cupo_credito) }}</p>
+  <p><strong>Comercial asignado:</strong> {{ cliente.comercial_asignado.nombre_completo if cliente.comercial_asignado else "Sin asignar" }}</p>
+  <a class="btn secondary" href="{{ url_for('clientes.listar') }}">Volver</a>
+</div>
+{% endblock %}

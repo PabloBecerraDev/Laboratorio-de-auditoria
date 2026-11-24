@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Editar usuario — Nortia{% endblock %}
+{% block content %}
+<div class="card" style="max-width:480px;">
+  <h2>Editar {{ usuario.username }} (modificacion — A9.2.2)</h2>
+  <form method="post">
+    <label>Area</label>
+    <input type="text" name="area" value="{{ usuario.area }}" required>
+    <label>Cargo</label>
+    <input type="text" name="cargo" value="{{ usuario.cargo }}" required>
+    <label>Rol</label>
+    <select name="rol" required>
+      {% for r in roles %}<option value="{{ r }}" {% if r == usuario.rol %}selected{% endif %}>{{ r }}</option>{% endfor %}
+    </select>
+    <button class="btn" type="submit">Guardar</button>
+  </form>
+</div>
+{% endblock %}

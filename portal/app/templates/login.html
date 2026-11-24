@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesion — Nortia{% endblock %}
+{% block content %}
+<div class="card" style="max-width:380px;margin:40px auto;">
+  <h2>Iniciar sesion</h2>
+  <form method="post">
+    <label>Usuario</label>
+    <input type="text" name="username" autocomplete="username" required>
+    <label>Contrasena</label>
+    <input type="password" name="password" autocomplete="current-password" required>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+</div>
+{% endblock %}

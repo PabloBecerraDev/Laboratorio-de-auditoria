@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Usuarios — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Administracion de usuarios</h2>
+  {% if current_user.rol == "administrador_seguridad" %}
+  <a class="btn" href="{{ url_for('admin_usuarios.nuevo') }}">+ Nuevo usuario</a>
+  {% endif %}
+  <table style="margin-top:14px;">
+    <tr><th>Usuario</th><th>Nombre</th><th>Area</th><th>Rol</th><th>Estado</th><th>MFA</th>{% if current_user.rol == "administrador_seguridad" %}<th></th>{% endif %}</tr>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{ u.username }}</td>
+      <td>{{ u.nombre_completo }}</td>
+      <td>{{ u.area }}</td>
+      <td><span class="badge">{{ u.rol }}</span></td>
+      <td>{{ "Activo" if u.is_active_account else "Inactivo" }}</td>
+      <td>{{ "Si" if u.mfa_secret else "No" }}</td>
+      {% if current_user.rol == "administrador_seguridad" %}
+      <td>
+        <a class="btn secondary" href="{{ url_for('admin_usuarios.editar', user_id=u.id) }}">Editar</a>
+        {% if u.is_active_account %}
+        <form style="display:inline" method="post" action="{{ url_for('admin_usuarios.baja', user_id=u.id) }}">
+          <button class="btn danger" type="submit">Dar de baja</button>
+        </form>
+        {% else %}
+        <form style="display:inline" method="post" action="{{ url_for('admin_usuarios.reactivar', user_id=u.id) }}">
+          <button class="btn" type="submit">Reactivar</button>
+        </form>
+        {% endif %}
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

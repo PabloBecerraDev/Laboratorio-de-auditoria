@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Solicitudes de acceso — Nortia{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Solicitudes de acceso</h2>
+  <a class="btn" href="{{ url_for('solicitudes.nueva') }}">+ Nueva solicitud</a>
+  <table style="margin-top:14px;">
+    <tr><th>ID</th><th>Solicitante</th><th>Recurso</th><th>Justificacion</th><th>Estado</th><th>Fecha</th>{% if current_user.rol == "administrador_seguridad" %}<th></th>{% endif %}</tr>
+    {% for s in solicitudes %}
+    <tr>
+      <td>{{ s.id }}</td>
+      <td>{{ s.solicitante.nombre_completo }}</td>
+      <td>{{ s.recurso_solicitado }}</td>
+      <td>{{ s.justificacion }}</td>
+      <td><span class="badge">{{ s.estado }}</span></td>
+      <td>{{ s.fecha_solicitud.strftime("%Y-%m-%d %H:%M") }}</td>
+      {% if current_user.rol == "administrador_seguridad" %}
+      <td>
+        {% if s.estado == "pendiente" %}
+        <form style="display:inline" method="post" action="{{ url_for('solicitudes.resolver', solicitud_id=s.id) }}">
+          <input type="hidden" name="decision" value="aprobada">
+          <button class="btn" type="submit">Aprobar</button>
+        </form>
+        <form style="display:inline" method="post" action="{{ url_for('solicitudes.resolver', solicitud_id=s.id) }}">
+          <input type="hidden" name="decision" value="rechazada">
+          <button class="btn danger" type="submit">Rechazar</button>
+        </form>
+        {% endif %}
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

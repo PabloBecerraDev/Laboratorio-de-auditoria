@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Segundo factor — Nortia{% endblock %}
+{% block content %}
+<div class="card" style="max-width:380px;margin:40px auto;">
+  <h2>Verificacion en dos pasos</h2>
+  <p>Hola {{ username }}, tu rol requiere segundo factor (administrador de seguridad). Ingresa el codigo TOTP de tu app autenticadora.</p>
+  <form method="post">
+    <label>Codigo de 6 digitos</label>
+    <input type="text" name="codigo" inputmode="numeric" pattern="[0-9]*" maxlength="6" required autofocus>
+    <button class="btn" type="submit">Verificar</button>
+  </form>
+</div>
+{% endblock %}
