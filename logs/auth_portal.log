@@ -1,0 +1,19 @@
+{"timestamp": "2026-11-24T03:29:57.887929Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:30:16.340741Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:30:26.924683Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:30:38.814705Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:31:33.131694Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "FAILED", "ip_origen": "172.20.0.4", "detalle": "contrasena incorrecta (intento 1/5)"}
+{"timestamp": "2026-11-24T03:31:37.545773Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "FAILED", "ip_origen": "172.20.0.4", "detalle": "contrasena incorrecta (intento 2/5)"}
+{"timestamp": "2026-11-24T03:31:41.953349Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "FAILED", "ip_origen": "172.20.0.4", "detalle": "contrasena incorrecta (intento 3/5)"}
+{"timestamp": "2026-11-24T03:31:46.360897Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "FAILED", "ip_origen": "172.20.0.4", "detalle": "contrasena incorrecta (intento 4/5)"}
+{"timestamp": "2026-11-24T03:31:50.766259Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "LOCKED", "ip_origen": "172.20.0.4", "detalle": "5 intentos fallidos consecutivos"}
+{"timestamp": "2026-11-24T03:31:54.976036Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "BLOCKED", "ip_origen": "172.20.0.4", "detalle": "cuenta bloqueada, faltan 15 min"}
+{"timestamp": "2026-11-24T03:34:31.632133Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "BLOCKED", "ip_origen": "172.20.0.4", "detalle": "cuenta bloqueada, faltan 13 min"}
+{"timestamp": "2026-11-24T03:34:44.601665Z", "sistema": "portal-principal", "usuario": "jgarcia", "resultado": "BLOCKED", "ip_origen": "172.20.0.4", "detalle": "cuenta bloqueada, faltan 13 min"}
+{"timestamp": "2026-11-24T03:34:52.800705Z", "sistema": "portal-principal", "usuario": "msuarez", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:35:05.954978Z", "sistema": "portal-principal", "usuario": "msuarez", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login sin MFA"}
+{"timestamp": "2026-11-24T03:35:26.233218Z", "sistema": "portal-principal", "usuario": "fguzman", "resultado": "PASSWORD_OK_MFA_PENDING", "ip_origen": "172.20.0.4", "detalle": "segundo factor requerido"}
+{"timestamp": "2026-11-24T03:35:26.254433Z", "sistema": "portal-principal", "usuario": "fguzman", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login con MFA"}
+{"timestamp": "2026-11-24T03:35:43.696214Z", "sistema": "portal-principal", "usuario": "fguzman", "resultado": "PASSWORD_OK_MFA_PENDING", "ip_origen": "172.20.0.4", "detalle": "segundo factor requerido"}
+{"timestamp": "2026-11-24T03:35:44.215992Z", "sistema": "portal-principal", "usuario": "fguzman", "resultado": "MFA_FAILED", "ip_origen": "172.20.0.4", "detalle": "codigo TOTP invalido"}
+{"timestamp": "2026-11-24T03:35:44.948346Z", "sistema": "portal-principal", "usuario": "fguzman", "resultado": "SUCCESS", "ip_origen": "172.20.0.4", "detalle": "login con MFA"}

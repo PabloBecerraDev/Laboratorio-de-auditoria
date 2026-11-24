@@ -97,6 +97,15 @@ services:
       - nortia-net
     restart: "no"
 
+
+  kali:
+    image: kalilinux/kali-rolling
+    container_name: nortia-kali
+    command: sleep infinity
+    networks:
+      - nortia-net
+
+
 networks:
   nortia-net:
     driver: bridge
